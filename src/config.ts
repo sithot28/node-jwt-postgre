@@ -11,9 +11,9 @@ const config = {
         silly: 'log_silly'
     },
     db: {
-        user: process.env.DB_USER || 'postgres',
-        database: process.env.DB || 'mydb',
-        password: process.env.DB_PASS || 'sithotok',
+        user: process.env.DB_USER || '',
+        database: process.env.DB || '',
+        password: process.env.DB_PASS || '',
         host: process.env.DB_HOST || '',
         port: Number(process.env.DB_PORT) || 5432,
         max: Number(process.env.DB_MAX_CLIENTS) || 10,
