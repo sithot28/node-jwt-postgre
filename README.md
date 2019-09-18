@@ -1,4 +1,4 @@
 # node-jwt-postgre
-npm install
-npm run build-ts
-npm run watch
+1. npm install
+2. npm run build-ts
+3. npm run watch
