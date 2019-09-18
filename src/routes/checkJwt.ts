@@ -25,8 +25,8 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
     });
     const newtoken = jwt.sign({
         username: username,
-        userid: '11111',
-        role: 'admin'
+        userid: '11111', //get from db
+        role: 'admin' //get from db
     },
     config.jwtsecret,
     {expiresIn: '1h'}   

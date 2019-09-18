@@ -13,8 +13,7 @@ export const getUser = async (username: string, password: string)=> {
     //select from db    
     try {
         if (username === USERNAME) {
-            if (password === PASSWORD) {
-                
+            if (password === PASSWORD) {                
                 const token = jwt.sign({
                     username: username,
                     userid: '11111',
@@ -27,6 +26,7 @@ export const getUser = async (username: string, password: string)=> {
                 //console.log('Generated token : ',token);
             }
         }
+        return "error";
         
     } catch (error) {
         throw new Error(error);  

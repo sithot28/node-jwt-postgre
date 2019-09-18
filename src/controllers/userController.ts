@@ -13,15 +13,14 @@ export class userController{
         //Get username from database
         let user1=1234;
         await getUser(username,password)
-        .then((data)=>{
-            //console.log(data);
-            //res.setHeader('x-token', data);
+        .then((data)=>{   
+            console.log(data);         
             res.status(200).send({
                 token:data
-            });
+            });                        
         })
         .catch(err=>{
-            res.status(400).send(err);
+            res.status(400).send("err");
         })
         
     }
