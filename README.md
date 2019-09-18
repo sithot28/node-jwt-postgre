@@ -3,6 +3,10 @@
 Why TypeScript ?
 Just to keep our coding habbit away away away from painful bugs, from cowboys coding habbit of javascript. :)
 
+## Pre-requisite
+- Node v8+
+- Typescript
+
 A boilerplate to speedup up development of REST API with nodeJS using express. PostgreSQL database used as backend of API.
 Authentication method using JWT, with auto renew TOKEN expiry every time protected resources access, if client not active more than expiry time, than should do re-login.
 
