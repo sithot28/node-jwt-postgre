@@ -41,8 +41,7 @@ export class participantController{
 }
 
 export class claimController {    
-    public listClaim = async (req: Request, res: Response) => {
-        res.setHeader('token',req.params.decode);
+    public listClaim = async (req: Request, res: Response) => {        
         res.status(200).send({            
             message: 'Claims'
         });

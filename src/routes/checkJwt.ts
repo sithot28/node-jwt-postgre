@@ -6,11 +6,11 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
     //console.log(req.headers);
     const token = <string>req.headers['authorization'];     
     let jwtpayload;
-
+    console.log(token);
     //Chek validity of token at header request    
     try {
         jwtpayload = <any>jwt.verify(token.split(" ")[1], config.jwtsecret);
-        console.log('Sukses validasi jwt ',jwtpayload);
+        //console.log('Sukses validasi jwt ',jwtpayload);
         res.locals.jwtpayload = jwtpayload;
     } catch (error) {
         res.status(401).send('Error');
