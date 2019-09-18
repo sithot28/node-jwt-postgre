@@ -15,7 +15,8 @@ const pgconfig = {
 
 const pool = new pg.Pool(pgconfig);
 
-logger.info(`DB Connection Settings: ${JSON.stringify(pgconfig)}`);
+
+//logger.info(`DB Connection Settings: ${JSON.stringify(pgconfig)}`);
 
 
 pool.on('error', function (err: Error, client: pg.PoolClient) {
@@ -29,17 +30,6 @@ pool.on('error', function (err: Error, client: pg.PoolClient) {
  * @param data: the data to be stored
  * @return result
  */
-export const sqlToDB = async (sql:string, data:any) => {
-    logger.debug(`sqlToDB() sql: ${sql} | data: ${data}`);
-    let result : pg.QueryResult;
-    try {
-        result = await pool.query(sql, data);
-        return result;
-    } catch (error) {
-        throw new Error(error.message);
-    }
-}
-
 export const query = async (sql:string, data: any[]) => {
     logger.debug(`sqlToDB() sql: ${sql} | data: ${data}`);
     let result : pg.QueryResult;
@@ -51,11 +41,7 @@ export const query = async (sql:string, data: any[]) => {
     }
 }
 
-/*
- * Retrieve a SQL client with transaction from connection pool. If the client is valid, either
- * COMMMIT or ROALLBACK needs to be called at the end before releasing the connection back to pool.
- */
-export const getTransaction = async () => {
+export const startTransaction = async () => {
     logger.debug(`getTransaction()`);
     const client = await pool.connect();
     try {
@@ -72,8 +58,8 @@ export const getTransaction = async () => {
  * @param data: the data to be stored
  * @return result
  */
-export const sqlExecSingleRow = async (client:pg.PoolClient, sql:string, data:any) => {
-    logger.debug(`sqlExecSingleRow() sql: ${sql} | data: ${data}`);
+export const execSQL = async (client:pg.PoolClient, sql:string, data:any[]) => {
+    //logger.debug(`sqlExecSingleRow() sql: ${sql} | data: ${data}`);
     let result : pg.QueryResult;
     try {
         result = await client.query(sql, data);
@@ -91,9 +77,9 @@ export const sqlExecSingleRow = async (client:pg.PoolClient, sql:string, data:an
  * @param data: the data to be stored
  * @return result
  */
-export const sqlExecMultipleRows = async (client:pg.Client, sql:string, data:any) => {
-    logger.debug(`inside sqlExecMultipleRows()`);
-    logger.debug(`sqlExecMultipleRows() data: ${data}`);
+export const execSQLmultiRows = async (client:pg.Client, sql:string, data:any[]) => {
+    //logger.debug(`inside sqlExecMultipleRows()`);
+    //logger.debug(`sqlExecMultipleRows() data: ${data}`);
     if (data.length !== 0) {
         for(let item of data) {
             try {

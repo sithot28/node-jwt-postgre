@@ -1,6 +1,10 @@
-import dotenv from 'dotenv';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+const dotenv_1 = __importDefault(require("dotenv"));
 //DO NOT COMMIT YOUR .env FILE
-dotenv.config({ path:'.env.example'});
+dotenv_1.default.config({ path: '.env.example' });
 const config = {
     serviceName: process.env.SERVICENAME || 'node typescript postgres app',
     port: Number(process.env.PORT) || 3000,
@@ -19,8 +23,7 @@ const config = {
         max: Number(process.env.DB_MAX_CLIENTS) || 10,
         idleTimeoutMillis: Number(process.env.DB_IDLE_TIMEOUT_MS) || 30000
     },
-    jwtsecret: 'abcdefghijklmnopqrstuvwxyz123456789'
-}
-
-
-export = config;
+    jwtsecret: 'salamoksekali2015'
+};
+module.exports = config;
+//# sourceMappingURL=config.js.map
