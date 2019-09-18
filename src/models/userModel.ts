@@ -6,8 +6,8 @@ import * as config from '../config';
 const transactionSuccess : string = 'transaction success';
 
 //TODO change to db
-const USERNAME='';
-const PASSWORD='';
+const USERNAME='admin';
+const PASSWORD='admin';
 
 export const getUser = async (username: string, password: string)=> {
     //select from db    
