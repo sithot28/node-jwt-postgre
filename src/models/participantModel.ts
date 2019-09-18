@@ -1,6 +1,6 @@
 import {PoolClient, QueryResult} from 'pg';
 import * as dbUtils from '../utils/dbUtils';
-import { sqlExecSingleRow } from '../utils/dbUtils';
+import {startTransaction, execSQL, query } from '../utils/dbUtils';
 import logger  from '../utils/logger';
 const transactionSuccess : string = 'transaction success';
 
@@ -9,7 +9,7 @@ export const participantInfo = async ()=> {
     let data: string[][] =[];
     let result: QueryResult;
     try {
-        result = await dbUtils.sqlToDB(sql,data);
+        result = await dbUtils.query(sql,data);
         //console.log('Result ',result);
         return result;
     } catch(err) {
@@ -36,9 +36,9 @@ export const processTransaction = async ()=> {
     let data: any = [];
     let result_customer,result_product: QueryResult;
     try {
-        result_customer = await dbUtils.sqlToDB(sql_customer, data);        
+        result_customer = await dbUtils.query(sql_customer, data);        
         let param: any = [result_customer.rows[0]['id'],result_customer.rows[0]['nama'],'{"item": "Laptop"}'];
-        result_product = await dbUtils.sqlToDB(sql_product, param);
+        result_product = await dbUtils.query(sql_product, param);
         return result_product.rows;
     } catch (error) {
         throw new Error(error);
@@ -51,10 +51,10 @@ export const insertTransaction = async ()=>{
     let sql_sales2 = "DELETE from sales";
     let data_customer = [3,'SITHOT']; 
     let data_sales = [2019,9,15];    
-    let trx: PoolClient = await dbUtils.getTransaction();
+    let trx: PoolClient = await dbUtils.startTransaction();
     try {
-        await dbUtils.sqlExecSingleRow(trx,sql_customer,data_customer);
-        await dbUtils.sqlExecSingleRow(trx,sql_sales,data_sales);
+        await dbUtils.execSQL(trx,sql_customer,data_customer);
+        await dbUtils.execSQL(trx,sql_sales,data_sales);
         await dbUtils.commit(trx);
         return transactionSuccess;
     } catch (error) {
