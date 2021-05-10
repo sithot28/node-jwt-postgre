@@ -45,7 +45,7 @@
     "format": "^0.2.2",
     "helmet": "^3.21.0",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.21",
     "lusca": "^1.6.1",
     "nodemailer": "^6.2.1",
     "nodemon": "^1.19.2",
